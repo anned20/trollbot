@@ -34,7 +34,7 @@ module.exports = [
             const subreddit = msg.content.substr(8);
 
             if (!subreddit) {
-                msg.reply('Usage: !reddit {subreddit}')
+                return msg.reply('Usage: !reddit {subreddit}');
             }
 
             try {
@@ -45,7 +45,7 @@ module.exports = [
                 msg.delete();
                 return msg.channel.send(reply);
             } catch (e) {
-                return msg.reply(`Couldn't get subreddit ${subreddit}`)
+                return msg.reply(`Couldn't get subreddit ${subreddit}`);
             }
         },
     },
