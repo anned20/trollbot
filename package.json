@@ -9,12 +9,15 @@
   },
   "author": "",
   "license": "ISC",
-  "engines": {"node": "8.1.2"},
+  "engines": {
+    "node": "8.1.2"
+  },
   "dependencies": {
     "discord.js": "^11.3.2",
     "dotenv": "^5.0.1",
     "google": "^2.1.0",
     "google-translate-api": "^2.3.0",
+    "google-translate-token": "^1.0.0",
     "google-tts-api": "0.0.2",
     "node-opus": "^0.2.7",
     "snoowrap": "^1.15.2"
