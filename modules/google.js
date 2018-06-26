@@ -3,12 +3,16 @@ const google = require('google');
 
 module.exports = [
     {
-        match: new RegExp(/^!google/),
+        match: new RegExp(/^!google\b/),
         value: (msg) => {
             const toSearch = msg.content.substr(8);
 
             google(toSearch, (err, res) => {
-                if (err) console.error(err);
+                if (err) {
+                    console.error(err);
+
+                    msg.reply('Something went wrong');
+                }
 
                 const reply = new Discord.RichEmbed();
 
@@ -20,7 +24,7 @@ module.exports = [
                 ;
 
                 msg.delete();
-                msg.channel.send(reply);
+                return msg.channel.send(reply);
             });
         },
     }

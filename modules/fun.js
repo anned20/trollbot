@@ -1,14 +1,19 @@
 module.exports = [
     {
-        match: new RegExp(/^!dudes/),
+        match: new RegExp(/^ayy/i),
         value: (msg) => {
-            return msg.reply('https://www.youtube.com/watch?v=VfaNCw2bF48');
+            return msg.channel.send('lmao');
         },
     },
     {
-        match: new RegExp(/^!mock/),
+        match: new RegExp(/^!dudes\b/),
         value: (msg) => {
-            msg.delete();
+            return msg.channel.send('https://www.youtube.com/watch?v=VfaNCw2bF48');
+        },
+    },
+    {
+        match: new RegExp(/^!mock\b/),
+        value: (msg) => {
             let text = msg.content.substr(6).toLowerCase();
 
             if (!text) {
@@ -28,6 +33,16 @@ module.exports = [
             text = Buffer.from(`spongebob\t${top}/${bottom}`).toString('base64');
 
             return msg.channel.send(`https://memegen.link/_${text}.jpg`);
+        },
+    },
+    {
+        match: new RegExp(/^!avatar/),
+        value: (msg) => {
+            const users = msg.mentions.users;
+
+            users.forEach((user) => {
+                msg.channel.send(user.avatarURL);
+            });
         },
     },
 ];

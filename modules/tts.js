@@ -89,14 +89,4 @@ module.exports = [
             }
         },
     },
-    {
-        match: new RegExp(/^!avatar/),
-        value: (msg) => {
-            const users = msg.mentions.users;
-
-            users.forEach((user) => {
-                msg.channel.send(user.avatarURL);
-            });
-        },
-    },
 ];

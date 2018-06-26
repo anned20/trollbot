@@ -40,6 +40,10 @@ module.exports = [
             try {
                 const post = await r.getSubreddit(subreddit).getRandomSubmission();
 
+                if (post.over_18 && !msg.channel.nsfw) {
+                    return msg.channel.send('This post can\'t be displayed in a non-nsfw channel');
+                }
+
                 const reply = getReply(post);
 
                 msg.delete();
@@ -54,9 +58,11 @@ module.exports = [
         value: async (msg) => {
             const subreddits = [
                 'meirl',
+                'me_irl',
                 '2meirl4meirl',
                 'memes',
                 'dankmemes',
+                'dank_meme',
                 'MemeEconomy',
                 'wholesomememes',
             ];

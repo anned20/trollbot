@@ -2,7 +2,6 @@ module.exports = [
     {
         match: new RegExp(/^!a\b/),
         value: (msg) => {
-            msg.delete();
             const toTransform = msg.content.substr(3);
 
             let chars = toTransform.split('');
@@ -15,7 +14,8 @@ module.exports = [
                 return char;
             });
 
-            return msg.reply(chars.join(''));
+            msg.delete();
+            return msg.channel.send(chars.join(''));
         },
     }
 ];
