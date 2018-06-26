@@ -20,11 +20,9 @@ const activities = [
 ];
 
 client.on('ready', () => {
-    setInterval(() => {
-        let activity = activities[Math.floor(Math.random() * activities.length)];
+    let activity = activities[Math.floor(Math.random() * activities.length)];
 
-        client.user.setActivity(activity.name, {type: activity.type});
-    }, 60000);
+    client.user.setActivity(activity.name, {type: activity.type});
 });
 
 const loader = require('./loader')(client);
