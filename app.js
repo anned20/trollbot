@@ -4,8 +4,27 @@ const client = new Discord.Client();
 
 client.login(process.env.DISCORD_TOKEN);
 
+const activities = [
+    {
+        name: 'with your mom',
+        type: 'PLAYING',
+    },
+    {
+        name: 'dank memes',
+        type: 'WATCHING',
+    },
+    {
+        name: 'All Star',
+        type: 'LISTENING',
+    },
+];
+
 client.on('ready', () => {
-    client.user.setActivity('trolling');
+    setInterval(() => {
+        let activity = activities[Math.floor(Math.random() * activities.length)];
+
+        client.user.setActivity(activity.name, {type: activity.type});
+    }, 60000);
 });
 
 const loader = require('./loader')(client);
