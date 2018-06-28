@@ -3,7 +3,7 @@ const google = require('google');
 
 module.exports = [
     {
-        match: new RegExp(/^!google\b/),
+        match: new RegExp(`^${process.env.PREFIX}google\\b`),
         value: (msg) => {
             const toSearch = msg.content.substr(8);
 

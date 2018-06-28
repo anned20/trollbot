@@ -1,6 +1,6 @@
 module.exports = [
     {
-        match: new RegExp(/^!a\b/),
+        match: new RegExp(`^${process.env.PREFIX}a\\b`),
         value: (msg) => {
             const toTransform = msg.content.substr(3);
 

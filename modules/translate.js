@@ -3,7 +3,7 @@ const translate = require('google-translate-api');
 
 module.exports = [
     {
-        match: new RegExp(/^!translate/),
+        match: new RegExp(`^${process.env.PREFIX}translate\\b`),
         value: async (msg) => {
             const toTranslate = msg.content.substr(11);
 

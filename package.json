@@ -19,6 +19,7 @@
     "google-translate-api": "^2.3.0",
     "google-translate-token": "^1.0.0",
     "google-tts-api": "0.0.2",
+    "node-fetch": "^2.1.2",
     "node-opus": "^0.2.7",
     "snoowrap": "^1.15.2"
   }

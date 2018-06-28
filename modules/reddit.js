@@ -29,7 +29,7 @@ const getReply = (post) => {
 
 module.exports = [
     {
-        match: new RegExp(/^!reddit/),
+        match: new RegExp(`^${process.env.PREFIX}reddit\\b`),
         value: async (msg) => {
             const subreddit = msg.content.substr(8);
 
@@ -54,7 +54,7 @@ module.exports = [
         },
     },
     {
-        match: new RegExp(/^!meme$/),
+        match: new RegExp(`^${process.env.PREFIX}meme$`),
         value: async (msg) => {
             const subreddits = [
                 'meirl',

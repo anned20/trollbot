@@ -1,3 +1,28 @@
+const allowed = [
+    'yuno',
+    'puffin',
+    'grumpycat',
+    'facepalm',
+    'doge',
+    'blb',
+];
+
+const memegen = (template, text) => {
+    let top = text;
+    let bottom = '';
+    if (text.includes('+')) {
+        top = text.split('+')[0].trim();
+        bottom = text.split('+')[1].trim();
+    }
+
+    text = text.replace(/\s+/g, '_');
+    text = text.replace(/[^a-z_1-9]/g, '');
+
+    text = Buffer.from(`${template}\t${top}/${bottom}`).toString('base64');
+
+    return `https://memegen.link/_${text}.jpg`;
+};
+
 module.exports = [
     {
         match: new RegExp(/^ayy/i),
@@ -6,13 +31,13 @@ module.exports = [
         },
     },
     {
-        match: new RegExp(/^!dudes\b/),
+        match: new RegExp(`^${process.env.PREFIX}dudes\$`),
         value: (msg) => {
             return msg.channel.send('https://www.youtube.com/watch?v=VfaNCw2bF48');
         },
     },
     {
-        match: new RegExp(/^!mock\b/),
+        match: new RegExp(`^${process.env.PREFIX}mock\\b`),
         value: (msg) => {
             let text = msg.content.substr(6).toLowerCase();
 
@@ -20,23 +45,31 @@ module.exports = [
                 return msg.reply('Usage: !mock {text}');
             }
 
-            let top = text;
-            let bottom = '';
-            if (text.includes('+')) {
-                top = text.split('+')[0].trim();
-                bottom = text.split('+')[1].trim();
-            }
-
-            text = text.replace(/\s+/g, '_');
-            text = text.replace(/[^a-z_]/g, '');
-
-            text = Buffer.from(`spongebob\t${top}/${bottom}`).toString('base64');
-
-            return msg.channel.send(`https://memegen.link/_${text}.jpg`);
+            return msg.channel.send(memegen('spongebob', text));
         },
     },
     {
-        match: new RegExp(/^!avatar/),
+        match: new RegExp(`^${process.env.PREFIX}genmeme\\b`),
+        value: (msg) => {
+            const re = new RegExp(`^${process.env.PREFIX}genmeme\\s+(\\w+)\\s+(.*)`);
+            const matches = msg.content.match(re);
+
+            if (!matches || matches.length < 3) {
+                return msg.reply(`Usage: ${process.env.PREFIX}genmeme {template} {text}`);
+            }
+
+            const template = matches[1];
+            const text = matches[2];
+
+            if (!allowed.includes(template)) {
+                return msg.reply('That template is either not found or not allowed.');
+            }
+
+            return msg.channel.send(memegen(template, text));
+        },
+    },
+    {
+        match: new RegExp(`^${process.env.PREFIX}avatar\\b`),
         value: (msg) => {
             const users = msg.mentions.users;
 
